@@ -16,7 +16,7 @@ const getItems = (req, res) => {
 
 const createItems = (req, res) => {
   const { name, weather, imageUrl } = req.body;
-  const userId = req.user._id;
+  const { userId } = req.user._id;
   ClothingItem.create({ name, weather, imageUrl, owner: userId })
     .then((item) => res.status(201).send(item))
     .catch((err) => {
@@ -29,7 +29,7 @@ const createItems = (req, res) => {
 };
 
 const deleteItem = (req, res) => {
-  const {itemId} = req.params.itemId;
+  const { itemId } = req.params.itemId;
   ClothingItem.findByIdAndDelete(itemId)
     .orFail(() => {
       const error = new Error("Item not found");
@@ -68,9 +68,7 @@ const likeItem = (req, res) => {
       error.statusCode = NOT_FOUND;
       throw error;
     })
-    .then((item) => {
-      return res.status(200).send(item);
-    })
+    .then((item) => res.status(200).send(item))
     .catch((err) => {
       console.error(err);
       if (err.name === "DocumentNotFoundError") {
@@ -88,7 +86,7 @@ const likeItem = (req, res) => {
 };
 
 const dislikeItem = (req, res) => {
-  const itemId = req.params.itemId;
+  const { itemId } = req.params.itemId;
   const userId = req.user._id;
   ClothingItem.findByIdAndUpdate(
     itemId,
@@ -100,16 +98,15 @@ const dislikeItem = (req, res) => {
       error.statusCode = NOT_FOUND;
       throw error;
     })
-    .then((item) => {
-      return res.status(200).send(item);
-    })
+    .then((item) => res.status(200).send(item))
     .catch((err) => {
       console.error(err);
       if (err.name === "DocumentNotFoundError") {
         return res
           .status(NOT_FOUND)
           .send({ message: "Clothing item not found" });
-      } else if (err.name === "CastError") {
+      }
+      if (err.name === "CastError") {
         return res
           .status(BAD_REQUEST)
           .send({ message: "Invalid user ID format" });
