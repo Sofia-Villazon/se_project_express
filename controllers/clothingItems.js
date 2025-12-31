@@ -1,7 +1,6 @@
 const ClothingItem = require("../models/clothingItem");
 const {
   BAD_REQUEST,
-  UNAUTHORIZED,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
 } = require("../utils/errors");
@@ -30,7 +29,7 @@ const createItems = (req, res) => {
 };
 
 const deleteItem = (req, res) => {
-  const itemId = req.params.itemId;
+  const {itemId} = req.params.itemId;
   ClothingItem.findByIdAndDelete(itemId)
     .orFail(() => {
       const error = new Error("Item not found");
@@ -38,7 +37,7 @@ const deleteItem = (req, res) => {
       throw error;
     })
     .then((item) => {
-      return res.send({ message: "Clothing item deleted successfully" });
+      return res.send({ message: `${item.name} deleted successfully` });
     })
     .catch((err) => {
       console.error(err);
