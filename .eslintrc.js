@@ -22,5 +22,10 @@ module.exports = {
   rules: {
     "no-underscore-dangle": "off",
     "no-console": ["warn", { allow: ["error"] }],
+    "no-shadow": "off",
+    "no-return-assign": "off",
+    "no-sequences": "off",
+    "no-nested-ternary": "off",
+    "no-unused-expressions": "off",
   },
 };

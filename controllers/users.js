@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const {
   BAD_REQUEST,
-  UNAUTHORIZED,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
 } = require("../utils/errors");
