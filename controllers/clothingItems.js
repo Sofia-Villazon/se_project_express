@@ -29,16 +29,18 @@ const createItems = (req, res) => {
 };
 
 const deleteItem = (req, res) => {
-  const { itemId } = req.params.itemId;
+  const { itemId } = req.params;
   ClothingItem.findByIdAndDelete(itemId)
     .orFail(() => {
       const error = new Error("Item not found");
-      error.statusCode = NOT_FOUND;
+      error.name = "DocumentNotFoundError";
       throw error;
     })
     .then((item) => res.send({ message: `${item.name} deleted successfully` }))
     .catch((err) => {
       console.error(err);
+
+      console.log(err.name);
       if (err.name === "DocumentNotFoundError") {
         return res
           .status(NOT_FOUND)
@@ -54,7 +56,7 @@ const deleteItem = (req, res) => {
 };
 
 const likeItem = (req, res) => {
-  const { itemId } = req.params.itemId;
+  const { itemId } = req.params;
   const userId = req.user._id;
   ClothingItem.findByIdAndUpdate(
     itemId,
@@ -63,12 +65,13 @@ const likeItem = (req, res) => {
   )
     .orFail(() => {
       const error = new Error("Item not found");
-      error.statusCode = NOT_FOUND;
+      error.name = "DocumentNotFoundError";
       throw error;
     })
     .then((item) => res.status(200).send(item))
     .catch((err) => {
       console.error(err);
+
       if (err.name === "DocumentNotFoundError") {
         return res
           .status(NOT_FOUND)
@@ -84,7 +87,7 @@ const likeItem = (req, res) => {
 };
 
 const dislikeItem = (req, res) => {
-  const { itemId } = req.params.itemId;
+  const { itemId } = req.params;
   const userId = req.user._id;
   ClothingItem.findByIdAndUpdate(
     itemId,
@@ -93,16 +96,14 @@ const dislikeItem = (req, res) => {
   )
     .orFail(() => {
       const error = new Error("Item not found");
-      error.statusCode = NOT_FOUND;
+      error.name = "DocumentNotFoundError";
       throw error;
     })
     .then((item) => res.status(200).send(item))
     .catch((err) => {
       console.error(err);
       if (err.name === "DocumentNotFoundError") {
-        return res
-          .status(NOT_FOUND)
-          .send({ message: "Clothing item not found" });
+        return res.status(NOT_FOUND).send({ message: "User not found" });
       }
       if (err.name === "CastError") {
         return res
