@@ -14,11 +14,9 @@ mongoose
   })
   .catch(console.error);
 
-app.use(express.json());
-
 app.use((req, res, next) => {
   req.user = {
-    _id: "69553155db35f1c3e5ecc370", // paste the _id of the test user created in the previous step
+    _id: "695523ca8b7a58e60134899d", // paste the _id of the test user created in the previous step
   };
   next();
 });
