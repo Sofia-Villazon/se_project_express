@@ -46,7 +46,8 @@ const deleteItem = (req, res) => {
         return res
           .status(NOT_FOUND)
           .send({ message: "Clothing item not found" });
-      } else if (err.name === "CastError") {
+      }
+      if (err.name === "CastError") {
         return res
           .status(BAD_REQUEST)
           .send({ message: "Invalid user ID format" });
@@ -56,7 +57,7 @@ const deleteItem = (req, res) => {
 };
 
 const likeItem = (req, res) => {
-  const itemId = req.params.itemId;
+  const { itemId } = req.params.itemId;
   const userId = req.user._id;
   ClothingItem.findByIdAndUpdate(
     itemId,
@@ -77,7 +78,8 @@ const likeItem = (req, res) => {
         return res
           .status(NOT_FOUND)
           .send({ message: "Clothing item not found" });
-      } else if (err.name === "CastError") {
+      }
+      if (err.name === "CastError") {
         return res
           .status(BAD_REQUEST)
           .send({ message: "Invalid user ID format" });
