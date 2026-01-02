@@ -7,3 +7,21 @@ The back-end project is focused on creating a server for the WTWR application. Y
 
 ### Testing
 Before committing your code, make sure you edit the file `sprint.txt` in the root folder. The file `sprint.txt` should contain the number of the sprint you're currently working on. For ex. 12
+
+## Technologies and Techniques Used
+
+### Backend Technologies:
+- **Node.js** - JavaScript runtime environment
+- **Express.js** - Web application framework for Node.js
+- **MongoDB** - NoSQL database for storing data
+- **Mongoose** - MongoDB object modeling for Node.js
+
+### Development Tools:
+- **ESLint** - Code linting tool for maintaining code quality
+- **Airbnb JavaScript Style Guide** - Code style configuration
+- **Prettier** - Code formatting tool
+- **EditorConfig** - Consistent coding styles across editors
+
+### Other Tools:
+- **npm** - Package manager
+- **Git** - Version control
