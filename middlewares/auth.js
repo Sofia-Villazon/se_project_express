@@ -12,7 +12,7 @@ const authorization = (req, res, next) => {
   try {
     playload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    res.status(401).send({ message: "Authorization required" });
+    return res.status(401).send({ message: "Authorization required" });
   }
 
   req.user = { _id: playload._id };
