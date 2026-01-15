@@ -1,4 +1,6 @@
 const ClothingItem = require("../models/clothingItem");
+const user = require("../models/user");
+
 const {
   BAD_REQUEST,
   NOT_FOUND,
@@ -30,13 +32,22 @@ const createItems = (req, res) => {
 
 const deleteItem = (req, res) => {
   const { itemId } = req.params;
+  const userId = req.user._id;
   ClothingItem.findByIdAndDelete(itemId)
     .orFail(() => {
       const error = new Error("Item not found");
       error.name = "DocumentNotFoundError";
       throw error;
     })
-    .then((item) => res.send({ message: `${item.name} deleted successfully` }))
+    .then((item) => {
+      if (userId === item.owner) {
+        res.send({ message: `${item.name} deleted successfully` });
+      } else {
+        res
+          .status(403)
+          .send({ message: "You don't have permission to delete this item" });
+      }
+    })
     .catch((err) => {
       console.error(err);
 
