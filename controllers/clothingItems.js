@@ -1,5 +1,4 @@
 const ClothingItem = require("../models/clothingItem");
-const user = require("../models/user");
 
 const {
   BAD_REQUEST,

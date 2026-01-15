@@ -6,9 +6,7 @@ const {
   BAD_REQUEST,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
-  UNAUTHORIZED,
 } = require("../utils/errors");
-const user = require("../models/user");
 
 const getCurrentUser = (req, res) => {
   const userId = req.user._id;
@@ -84,7 +82,6 @@ const login = (req, res) => {
       res.send({ message: "Login successful", token, user });
     })
     .catch((err) => {
-      // Login failed
       if (!email || !password) {
         return res
           .status(BAD_REQUEST)
@@ -108,7 +105,7 @@ const updateProfile = (req, res) => {
       }
       const userObj = user.toObject();
       delete userObj.password;
-      res.send(userObj);
+      return res.send(userObj);
     })
     .catch((err) => {
       console.error(err);

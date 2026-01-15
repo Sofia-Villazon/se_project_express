@@ -6,7 +6,6 @@ const cors = require("cors");
 const app = express();
 const { PORT = 3001 } = process.env;
 
-app.use(cors());
 app.use(express.json());
 
 mongoose
@@ -17,6 +16,7 @@ mongoose
   .catch(console.error);
 
 app.use("/", routes);
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
