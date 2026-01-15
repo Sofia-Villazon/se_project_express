@@ -16,7 +16,7 @@ const authorization = (req, res, next) => {
   }
 
   req.user = { _id: playload._id };
-  next();
+  return next();
 };
 
 module.exports = { authorization };
