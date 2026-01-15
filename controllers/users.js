@@ -74,11 +74,9 @@ const login = (req, res) => {
       return userObj;
     })
     .then((user) => {
-      // Successful login
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
         expiresIn: "7d",
       });
-      delete user.password;
       res.send({ message: "Login successful", token, user });
     })
     .catch((err) => {
@@ -87,7 +85,7 @@ const login = (req, res) => {
           .status(BAD_REQUEST)
           .send({ message: "Email and password are required" });
       }
-      res.status(401).send({ message: err.message });
+      return res.status(401).send({ message: err.message });
     });
 };
 
@@ -117,7 +115,7 @@ const updateProfile = (req, res) => {
           .status(BAD_REQUEST)
           .send({ message: "Invalid user ID format" });
       }
-      res.status(500).send({ message: "Error" });
+      return res.status(500).send({ message: "Error" });
     });
 };
 module.exports = {
