@@ -11,7 +11,6 @@ router.post("/signin", login);
 
 router.use("/items", clothingItemRoutes);
 
-// router.use(authorization);
 router.use("/users", authorization, userRoutes);
 
 router.use((req, res) => {

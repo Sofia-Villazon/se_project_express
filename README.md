@@ -25,3 +25,8 @@ Before committing your code, make sure you edit the file `sprint.txt` in the roo
 ### Other Tools:
 - **npm** - Package manager
 - **Git** - Version control
+
+ ## Project Pitch Video
+ 
+ Check out [this video](https://drive.google.com/file/d/1F6N02QXUvyb5rCHmBywQRPChsvsvvrkH/view?usp=sharing), where I describe my 
+ project and some challenges I faced while building it.
