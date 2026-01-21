@@ -7,6 +7,7 @@ const {
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   CONFLICT,
+  UNAUTHORIZED,
 } = require("../utils/errors");
 
 const getCurrentUser = (req, res) => {
