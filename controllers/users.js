@@ -6,6 +6,7 @@ const {
   BAD_REQUEST,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
+  CONFLICT,
 } = require("../utils/errors");
 
 const getCurrentUser = (req, res) => {
@@ -51,7 +52,7 @@ const createUser = (req, res) => {
     .then((user) => res.status(201).send(user))
     .catch((err) => {
       if (err.code === 11000) {
-        return res.status(409).send({ message: "Email already in use" });
+        return res.status(CONFLICT).send({ message: "Email already in use" });
       }
       if (err.name === "ValidationError") {
         return res.status(BAD_REQUEST).send({ message: err.message });
@@ -67,6 +68,12 @@ const createUser = (req, res) => {
 
 const login = (req, res) => {
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res
+      .status(BAD_REQUEST)
+      .send({ message: "Email and password are required" });
+  }
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const userObj = user.toObject();
@@ -80,12 +87,12 @@ const login = (req, res) => {
       res.send({ message: "Login successful", token, user });
     })
     .catch((err) => {
-      if (!email || !password) {
-        return res
-          .status(BAD_REQUEST)
-          .send({ message: "Email and password are required" });
+      if (err.message === "Incorrect email or password") {
+        return res.status(UNAUTHORIZED).send({ message: err.message });
       }
-      return res.status(401).send({ message: err.message });
+      return res
+        .status(INTERNAL_SERVER_ERROR)
+        .send({ message: "An error occurred during login" });
     });
 };
 
@@ -115,7 +122,7 @@ const updateProfile = (req, res) => {
           .status(BAD_REQUEST)
           .send({ message: "Invalid user ID format" });
       }
-      return res.status(500).send({ message: "Error" });
+      return res.status(INTERNAL_SERVER_ERROR).send({ message: "Error" });
     });
 };
 module.exports = {
