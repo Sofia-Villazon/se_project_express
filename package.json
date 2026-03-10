@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@hexlet/immutable-fs-trees": "^0.7.2",
+    "@slack/web-api": "^7.14.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "directory-tree": "^3.5.2",
