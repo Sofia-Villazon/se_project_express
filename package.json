@@ -32,7 +32,9 @@
     "mongoose": "^8.21.0",
     "shelljs": "^0.10.0",
     "url-regex-safe": "^4.0.0",
-    "validator": "^13.15.35"
+    "validator": "^13.15.35",
+    "winston": "^3.19.0",
+    "winston-express": "^0.1.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
