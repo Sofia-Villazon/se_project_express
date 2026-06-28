@@ -27,5 +27,6 @@ module.exports = {
     "no-sequences": "off",
     "no-nested-ternary": "off",
     "no-unused-expressions": "off",
+    "no-unused-vars": ["error", { argsIgnorePattern: "next" }],
   },
 };
