@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const app = express();
 const { PORT = 3001 } = process.env;
-
+app.use(cors());
 app.use(express.json());
 
 mongoose
@@ -19,7 +19,6 @@ mongoose
   })
   .catch(console.error);
 
-app.use(cors());
 app.use(requestLogger);
 app.use("/", routes);
 
