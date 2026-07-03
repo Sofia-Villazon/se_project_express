@@ -15,9 +15,9 @@ const { NOT_FOUND } = require("../utils/errors");
 router.post("/signup", validateUserInfo, createUser);
 router.post("/signin", validateAuthentification, login);
 
-router.use("/items", validateClothingItem, clothingItemRoutes);
+router.use("/items", clothingItemRoutes);
 
-router.use("/users", validateIds, userRoutes);
+router.use("/users", userRoutes);
 
 router.use((req, res, next) => {
   res.status(NOT_FOUND).send({ message: "Requested resource not found" });

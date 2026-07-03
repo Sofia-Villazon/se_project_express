@@ -7,6 +7,12 @@ const {
   dislikeItem,
 } = require("../controllers/clothingItems");
 const { authorization } = require("../middlewares/auth");
+// const {
+//   validateClothingItem,
+//   validateUserInfo,
+//   validateAuthentification,
+//   validateIds,
+// } = require("../middlewares/validation");
 
 router.get("/", getItems);
 
