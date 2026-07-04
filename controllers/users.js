@@ -27,8 +27,9 @@ const getCurrentUser = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
+      }else{
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -53,8 +54,9 @@ const createUser = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
+      }else{
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -107,8 +109,9 @@ const updateProfile = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
+      }else{
+        next(err);
       }
-      next(err);
     });
 };
 module.exports = {
