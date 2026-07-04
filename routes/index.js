@@ -17,7 +17,7 @@ router.post("/signin", validateAuthentification, login);
 
 router.use("/items", clothingItemRoutes);
 
-router.use("/users", validateIds, userRoutes);
+router.use("/users", validateIds, authorization, userRoutes);
 
 router.use((req, res, next) => {
   res.status(NOT_FOUND).send({ message: "Requested resource not found" });
