@@ -9,6 +9,7 @@ const NotFoundError = require("../errors/not-found-err");
 const ConflictError = require("../errors/conflict-err");
 
 const getCurrentUser = (req, res, next) => {
+  console.log("req.user:", req.user);
   const userId = req.user._id;
   User.findById(userId)
     .orFail(() => {
@@ -27,7 +28,7 @@ const getCurrentUser = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
-      }else{
+      } else {
         next(err);
       }
     });
@@ -54,7 +55,7 @@ const createUser = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
-      }else{
+      } else {
         next(err);
       }
     });
@@ -81,7 +82,7 @@ const login = (req, res, next) => {
     .catch((err) => {
       if (err.message === "Incorrect email or password") {
         next(new UnauthorizedError("Incorrect email or password"));
-      }else{
+      } else {
         next(err);
       }
     });
@@ -109,7 +110,7 @@ const updateProfile = (req, res, next) => {
       }
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
-      }else{
+      } else {
         next(err);
       }
     });
