@@ -26,6 +26,11 @@ Before committing your code, make sure you edit the file `sprint.txt` in the roo
 - **npm** - Package manager
 - **Git** - Version control
 
+### Important links
+- [Backend deplyement domaine](api.myclotheswtwr.chickenkiller.com)
+
+-[Frontend GitHubRepo](https://github.com/Sofia-Villazon/se_project_react.git)
+
  ## Project Pitch Video
  
  Check out [this video](https://drive.google.com/file/d/1F6N02QXUvyb5rCHmBywQRPChsvsvvrkH/view?usp=sharing), where I describe my 

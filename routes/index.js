@@ -3,10 +3,8 @@ const userRoutes = require("./users");
 const { createUser, login } = require("../controllers/users");
 const { authorization } = require("../middlewares/auth");
 const {
-  validateClothingItem,
   validateUserInfo,
   validateAuthentification,
-  validateIds,
 } = require("../middlewares/validation");
 
 const clothingItemRoutes = require("./clothingItems");
