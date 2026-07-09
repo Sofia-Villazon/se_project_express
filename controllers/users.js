@@ -9,6 +9,7 @@ const NotFoundError = require("../errors/not-found-err");
 const ConflictError = require("../errors/conflict-err");
 
 const getCurrentUser = (req, res, next) => {
+  console.log(req);
   const userId = req.user._id;
   User.findById(userId)
     .orFail(() => {

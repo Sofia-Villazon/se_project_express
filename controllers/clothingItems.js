@@ -22,9 +22,8 @@ const createItems = (req, res, next) => {
     .catch((err) => {
       if (err.name === "ValidationError") {
         next(new BadRequestError("Invalid data provided"));
-      } else {
-        next(err);
       }
+      return next(err);
     });
 };
 
@@ -52,7 +51,7 @@ const deleteItem = (req, res, next) => {
       if (err.name === "CastError") {
         next(new BadRequestError("Invalid user ID format"));
       }
-      next(err);
+      return next(err);
     });
 };
 

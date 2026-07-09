@@ -8,6 +8,16 @@ const validateURL = (value, helpers) => {
   return helpers.error("string.uri");
 };
 
+const validateUpdateUser = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    avatar: Joi.string().custom(validateURL).messages({
+      "string.empty": 'The "avatar" field must be filled in',
+      "string.uri": 'the "avatar" field must be a valid url',
+    }),
+  }),
+});
+
 const validateClothingItem = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -31,6 +41,12 @@ const validateUserInfo = celebrate({
   }),
 });
 
+const validateId = celebrate({
+  params: Joi.object().keys({
+    itemId: Joi.string().hex().length(24).required(),
+  }),
+});
+
 const validateAuthentification = celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
@@ -40,6 +56,8 @@ const validateAuthentification = celebrate({
 
 module.exports = {
   validateClothingItem,
+  validateId,
   validateUserInfo,
   validateAuthentification,
+  validateUpdateUser,
 };
